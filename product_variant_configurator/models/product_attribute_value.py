@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 class ProductAttributeValue(models.Model):
     _inherit = "product.attribute.value"
 
-#     bom_component_prod_id = fields.Many2one('product.product', string="BOM Component Product")
+    bom_component_prod_id = fields.Many2one('product.product', string="BOM Component Product")
     parent_attval_id = fields.Many2one('product.attribute.value', string="Parent Attribute Value")
     child_attval_ids = fields.Many2many('product.attribute.value',
                                         'table_parent_child_product_att_value_rel', 'col1', 'col2',

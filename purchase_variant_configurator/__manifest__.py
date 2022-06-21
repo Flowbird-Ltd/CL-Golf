@@ -1,21 +1,28 @@
-# Copyright 2016 Oihane Crucelaegui - AvanzOSC
-# Copyright 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2015 Oihane Crucelaegui (AvanzOSC)
 # Copyright 2016 ACSONE SA/NV
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
-# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
+# Copyright 2015-2017 Tecnativa - Pedro M. Baeza
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 {
-    "name": "Purchase - Product variants",
-    "summary": "Product variants in purchase management",
+    "name": "Product Variant Configurator",
+    "summary": "Provides an abstract model for product variant configuration.",
     "version": "15.0.1.0",
+    "category": "Product Variant",
     "license": "AGPL-3",
-    "depends": ["purchase", "product_variant_configurator", 'mrp'],
     "author": "AvanzOSC, "
     "Tecnativa, "
     "ACSONE SA/NV, "
     "Odoo Community Association (OCA)",
-    "category": "Purchase Management",
     "website": "https://github.com/OCA/product-variant",
-    "data": ["views/inherited_purchase_order_views.xml"],
-    "installable": True,
-    "post_init_hook": "assign_product_template",
+    "depends": ["product"],
+    "data": [
+        "security/product_configurator_security.xml",
+        "security/ir.model.access.csv",
+        "views/product_configurator_attribute.xml",
+        "views/inherited_product_template_views.xml",
+        "views/inherited_product_product_views.xml",
+        "views/inherited_product_category_views.xml",
+        "views/inherited_product_attribute_views.xml",
+    ],
 }

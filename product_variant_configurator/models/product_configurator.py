@@ -55,15 +55,15 @@ class ProductConfigurator(models.AbstractModel):
                 - len(list(filter(None, rec.product_attribute_ids.mapped("value_id"))))
             )
             for eachattline in rec.product_attribute_ids:
-                childAttValIDS = self.env['product.template.attribute.value'].search([('child_attribute_val_ids', 'in', eachattline.value_id.ids),
-                                                                                      ('product_tmpl_id', '=', rec.product_tmpl_id.id)])
+                childAttValIDS = self.env['product.attribute.value'].search([('child_attval_ids', 'in', eachattline.value_id.ids)])
                 if eachattline.value_id and childAttValIDS:
-                    child_att_ids = self.env['product.template.attribute.value'].search([('child_attribute_val_ids', 'in', eachattline.value_id.ids),
-                                                                                         ('product_tmpl_id', '=', rec.product_tmpl_id.id)]).mapped('attribute_id')
+#                     child_att_ids = childAttValIDS.mapped('attribute_id')
+#                     print ("\n--child_att_ids : ",child_att_ids.mapped('name'))
+                    child_att_ids = self.env['product.attribute.value'].search([('child_attval_ids', 'in', eachattline.value_id.ids)]).mapped('attribute_id')
                     for eca_id in child_att_ids:
                         line = rec.product_attribute_ids.filtered(lambda l: l.attribute_id.id == eca_id.id)
                         if line:
-                            related_attval_ids = childAttValIDS.filtered(lambda l: l.attribute_id.id == eca_id.id).mapped('product_attribute_value_id')
+                            related_attval_ids = childAttValIDS.filtered(lambda l: l.attribute_id.id == eca_id.id)
                             # find available on product based on configure
                             attributeval_ids = eachattline.product_tmpl_id.attribute_line_ids.filtered(lambda x: x.attribute_id == eca_id).value_ids.sorted()
                             # now find common

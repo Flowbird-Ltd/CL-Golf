@@ -22,10 +22,8 @@ class product_template(models.Model):
         for tmpl in self:
             av_rel_prod_ids = []
             for ptvv_id in ppid.product_template_attribute_value_ids:
-#                 if ptvv_id.product_attribute_value_id.bom_component_prod_id:
-#                         av_rel_prod_ids.append(ptvv_id.product_attribute_value_id.bom_component_prod_id.id)
-                  if ptvv_id.bom_component_prod_id:
-                    av_rel_prod_ids.append(ptvv_id.bom_component_prod_id.id)
+                if ptvv_id.product_attribute_value_id.bom_component_prod_id:
+                        av_rel_prod_ids.append(ptvv_id.product_attribute_value_id.bom_component_prod_id.id)
             if av_rel_prod_ids:
                 bom_id = bom_obj._bom_find(products=ppid, bom_type='phantom')
                 if not bom_id:
